@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学术主页 - Academic Homepage</title>
+  <style>
+    :root {
+      --color-bg: #FAFAF8;
+      --color-surface: #FFFFFF;
+      --color-text: #1A1A1A;
+      --color-text-secondary: #555555;
+      --color-text-muted: #888888;
+      --color-accent: #1A3A5C;
+      --color-accent-light: #2B5A8C;
+      --color-link: #1A3A5C;
+      --color-link-hover: #D4463A;
+      --color-border: #E0DDD8;
+      --color-border-light: #EDEAE5;
+      --color-tag-bg: #F0EDE8;
+      --color-tag-text: #4A4A4A;
+      --max-width: 820px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.75;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--color-link); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--color-link-hover); }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 250, 248, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border-light);
+    }
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+    .nav-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+
+    /* ===== MAIN ===== */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      flex-direction: row;
+      gap: 36px;
+      align-items: flex-start;
+      padding: 52px 0 44px;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+    .hero-photo {
+      flex-shrink: 0;
+      width: 148px;
+      height: 148px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #EBE8E3, #D8D4CE);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--color-text-muted);
+      overflow: hidden;
+    }
+    /* 替换照片: 删掉 .photo-placeholder, 加上 <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover;"> */
+
+    .hero-info { flex: 1; }
+    .hero-info h1 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+    .name-en {
+      font-size: 16px;
+      color: var(--color-text-muted);
+      margin-bottom: 14px;
+    }
+    .affiliation {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .affiliation strong { font-weight: 600; color: var(--color-text); }
+
+    .contact-links { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+    .contact-links a {
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+    .contact-links span.sep {
+      color: var(--color-text-muted);
+      font-size: 13px;
+    }
+
+    /* ===== BIO ===== */
+    .bio {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+    .bio p {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--color-text-secondary);
+      max-width: 680px;
+      margin-bottom: 10px;
+    }
+    .bio p:last-child { margin-bottom: 0; }
+
+    /* ===== SECTION ===== */
+    .section {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+    .section:last-child { border-bottom: none; }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 4px;
+    }
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== NEWS ===== */
+    .news-item {
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      padding: 7px 0;
+    }
+    .news-date {
+      flex-shrink: 0;
+      min-width: 80px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+    .news-text {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+    .badge-new {
+      display: inline-block;
+      background: var(--color-link-hover);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 2px;
+      margin-left: 6px;
+      vertical-align: middle;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== RESEARCH GRID ===== */
+    .research-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .research-card {
+      padding: 20px;
+      border: 1px solid var(--color-border);
+      border-radius: 5px;
+      background: var(--color-surface);
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .research-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: 0 2px 12px rgba(26, 58, 92, 0.06);
+    }
+    .research-card h3 {
+      font-size: 15.5px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .research-card p {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--color-text-secondary);
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .tags span {
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 3px;
+      background: var(--color-tag-bg);
+      color: var(--color-tag-text);
+    }
+
+    /* ===== PUBLICATIONS ===== */
+    .pub-year-heading {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-top: 28px;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--color-accent);
+      display: inline-block;
+    }
+    .pub-year-heading:first-of-type { margin-top: 0; }
+
+    .pub-item {
+      margin-bottom: 20px;
+      padding-left: 16px;
+      border-left: 2px solid var(--color-border-light);
+      transition: border-color 0.2s;
+    }
+    .pub-item:hover { border-left-color: var(--color-accent); }
+    .pub-title {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 3px;
+    }
+    .pub-authors {
+      font-size: 13.5px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+    .pub-authors .me {
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: underline;
+      text-decoration-color: var(--color-accent);
+      text-underline-offset: 2px;
+    }
+    .pub-venue {
+      font-size: 13.5px;
+      color: var(--color-text-muted);
+      font-style: italic;
+      margin-top: 2px;
+    }
+    .pub-links {
+      margin-top: 6px;
+      display: flex;
+      gap: 14px;
+    }
+    .pub-links a {
+      font-size: 12.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== TEACHING ===== */
+    .teaching-list { list-style: none; }
+    .teaching-item {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+    .teaching-item:last-child { border-bottom: none; }
+    .teaching-term {
+      flex-shrink: 0;
+      width: 100px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+    .course-name { font-size: 15px; font-weight: 600; }
+    .course-role { font-size: 13.5px; color: var(--color-text-muted); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--color-text-muted);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .hero { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+      .hero-photo { width: 120px; height: 120px; }
+      .contact-links { justify-content: center; }
+      .research-grid { grid-template-columns: 1fr; }
+      .teaching-item { flex-direction: column; gap: 4px; }
+      .teaching-term { width: auto; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-name">M.Y. Zhang</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#teaching">Teaching</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero" id="about">
+    <div class="hero-photo">
+      <!-- 替换照片: 把下面这行文字删掉, 换成 <img src="photo.jpg" style="width:100%;height:100%;object-fit:cover;" alt="照片"> -->
+      您的照片
+    </div>
+    <div class="hero-info">
+      <h1>张明远</h1>
+      <div class="name-en">Mingyuan Zhang, Ph.D.</div>
+      <div class="affiliation">
+        <strong>助理教授</strong><br>
+        计算机科学与技术学院<br>
+        某某大学 (XX University)
+      </div>
+      <div class="contact-links">
+        <a href="mailto:myzhang@example.edu">myzhang@example.edu</a>
+        <span class="sep">|</span>
+        <a href="#">Google Scholar</a>
+        <span class="sep">|</span>
+        <a href="#">GitHub</a>
+        <span class="sep">|</span>
+        <a href="#">ORCID</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== BIO ====== -->
+  <section class="bio">
+    <p>我目前是某某大学计算机科学与技术学院的助理教授。我的研究兴趣主要集中在<strong>自然语言处理</strong>、<strong>机器学习</strong>以及<strong>人工智能的可解释性</strong>方面。我于 2023 年在某某大学取得博士学位，导师为李教授。在此之前，我于 2018 年在某某大学获得计算机科学学士学位。</p>
+    <p>我的研究致力于开发更加可靠和可解释的语言模型，并探索其在医疗健康、教育等领域的实际应用。欢迎对相关研究感兴趣的同学联系我。</p>
+  </section>
+
+  <!-- ====== NEWS ====== -->
+  <section class="section">
+    <div class="section-title">News</div>
+    <div class="section-subtitle">最新动态</div>
+    <div class="news-item">
+      <span class="news-date">2026.03</span>
+      <span class="news-text">一篇论文被 ACL 2026 录用！<span class="badge-new">NEW</span></span>
+    </div>
+    <div class="news-item">
+      <span class="news-date">2025.12</span>
+      <span class="news-text">受邀在某某大学进行学术报告。</span>
+    </div>
+    <div class="news-item">
+      <span class="news-date">2025.09</span>
+      <span class="news-text">获得国家自然科学基金青年项目资助。</span>
+    </div>
+    <div class="news-item">
+      <span class="news-date">2025.06</span>
+      <span class="news-text">正式加入某某大学计算机学院，开始独立 PI 生涯。</span>
+    </div>
+  </section>
+
+  <!-- ====== RESEARCH ====== -->
+  <section class="section" id="research">
+    <div class="section-title">Research</div>
+    <div class="section-subtitle">研究方向</div>
+    <div class="research-grid">
+      <div class="research-card">
+        <h3>可解释自然语言处理</h3>
+        <p>探索语言模型的内部机制，开发新的可解释性分析方法，使模型决策过程更加透明。</p>
+        <div class="tags"><span>Interpretability</span><span>NLP</span><span>Transformers</span></div>
+      </div>
+      <div class="research-card">
+        <h3>大语言模型对齐</h3>
+        <p>研究如何使大语言模型的行为与人类价值观对齐，包括安全性和有用性之间的平衡。</p>
+        <div class="tags"><span>LLM Alignment</span><span>RLHF</span></div>
+      </div>
+      <div class="research-card">
+        <h3>AI 医疗应用</h3>
+        <p>将自然语言处理技术应用于电子病历分析、医学文献挖掘和临床决策辅助。</p>
+        <div class="tags"><span>BioNLP</span><span>Clinical AI</span></div>
+      </div>
+      <div class="research-card">
+        <h3>高效推理与模型压缩</h3>
+        <p>开发轻量化语言模型，研究知识蒸馏和模型剪枝技术，降低部署成本。</p>
+        <div class="tags"><span>Efficiency</span><span>Distillation</span><span>Pruning</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PUBLICATIONS ====== -->
+  <section class="section" id="publications">
+    <div class="section-title">Publications</div>
+    <div class="section-subtitle">发表论文 (* 表示共同一作)</div>
+
+    <div class="pub-year-heading">2026</div>
+    <div class="pub-item">
+      <div class="pub-title">Towards Faithful Explanations in Large Language Models: A Mechanistic Approach</div>
+      <div class="pub-authors"><span class="me">Mingyuan Zhang</span>, Weixin Li, Hao Chen</div>
+      <div class="pub-venue">ACL 2026 (to appear)</div>
+      <div class="pub-links"><a href="#">PDF</a><a href="#">Code</a><a href="#">BibTeX</a></div>
+    </div>
+
+    <div class="pub-year-heading">2025</div>
+    <div class="pub-item">
+      <div class="pub-title">Aligning Language Models with Minimal Human Feedback: A Contrastive Approach</div>
+      <div class="pub-authors"><span class="me">Mingyuan Zhang</span>*, Jun Wang*, Yiming Liu</div>
+      <div class="pub-venue">NeurIPS 2025</div>
+      <div class="pub-links"><a href="#">PDF</a><a href="#">Code</a><a href="#">BibTeX</a></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">Clinical Note Understanding via Structured Prompting and Chain-of-Thought Reasoning</div>
+      <div class="pub-authors">Hao Chen, <span class="me">Mingyuan Zhang</span>, Xiaofei Sun</div>
+      <div class="pub-venue">EMNLP 2025</div>
+      <div class="pub-links"><a href="#">PDF</a><a href="#">BibTeX</a></div>
+    </div>
+
+    <div class="pub-year-heading">2024</div>
+    <div class="pub-item">
+      <div class="pub-title">Efficient Knowledge Distillation for Multilingual Language Models</div>
+      <div class="pub-authors"><span class="me">Mingyuan Zhang</span>, Zi Yang, Jianfeng Gao</div>
+      <div class="pub-venue">ICML 2024</div>
+      <div class="pub-links"><a href="#">PDF</a><a href="#">Code</a><a href="#">Slides</a><a href="#">BibTeX</a></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">Probing Factual Knowledge in Transformer Language Models</div>
+      <div class="pub-authors">Weixin Li*, <span class="me">Mingyuan Zhang</span>*, Qian Liu</div>
+      <div class="pub-venue">ACL 2024</div>
+      <div class="pub-links"><a href="#">PDF</a><a href="#">Code</a><a href="#">BibTeX</a></div>
+    </div>
+  </section>
+
+  <!-- ====== TEACHING ====== -->
+  <section class="section" id="teaching">
+    <div class="section-title">Teaching</div>
+    <div class="section-subtitle">教学经历</div>
+    <ul class="teaching-list">
+      <li class="teaching-item">
+        <span class="teaching-term">Spring 2026</span>
+        <div><span class="course-name">自然语言处理导论 (CS 4521)</span> <span class="course-role">— 主讲教师</span></div>
+      </li>
+      <li class="teaching-item">
+        <span class="teaching-term">Fall 2025</span>
+        <div><span class="course-name">深度学习基础 (CS 3301)</span> <span class="course-role">— 主讲教师</span></div>
+      </li>
+      <li class="teaching-item">
+        <span class="teaching-term">Spring 2025</span>
+        <div><span class="course-name">机器学习研讨班 (CS 6900)</span> <span class="course-role">— 合作授课</span></div>
+      </li>
+      <li class="teaching-item">
+        <span class="teaching-term">Fall 2024</span>
+        <div><span class="course-name">人工智能概论 (CS 2101)</span> <span class="course-role">— 助教 (TA)</span></div>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2026 Mingyuan Zhang &middot; Last updated: March 2026 &middot; <a href="#">Back to top &uarr;</a>
+</footer>
+
+</body>
+</html>
